@@ -16,7 +16,7 @@ import com.pma.entity.User;
 import com.pma.repository.UserRepository;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/v1/policy-management")
 public class UserController {
 	
 	private UserRepository userRepository;

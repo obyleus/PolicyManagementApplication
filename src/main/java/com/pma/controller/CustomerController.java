@@ -16,7 +16,7 @@ import com.pma.entity.Customer;
 import com.pma.repository.CustomerRepository;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/api/v1/policy-management")
 public class CustomerController {
 	
 	
@@ -31,7 +31,6 @@ public class CustomerController {
 	public Customer addNewCustomer(@RequestBody Customer newCustomer) {
 		return customerRepository.save(newCustomer);
 	}
-	
 	
 	@GetMapping("/customers")
 	public List<Customer> getAllCustomer() {
