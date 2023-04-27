@@ -1,4 +1,4 @@
-package com.pma.config;
+package com.obyleus.policymanagement.config;
 
 import javax.sql.DataSource;
 

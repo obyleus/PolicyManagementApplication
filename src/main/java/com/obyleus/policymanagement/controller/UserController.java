@@ -1,4 +1,4 @@
-package com.pma.controller;
+package com.obyleus.policymanagement.controller;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pma.entity.User;
-import com.pma.repository.UserRepository;
+import com.obyleus.policymanagement.entity.User;
+import com.obyleus.policymanagement.repository.UserRepository;
 
 @RestController
 @RequestMapping("/api/v1/policy-management")

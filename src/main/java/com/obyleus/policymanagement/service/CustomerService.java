@@ -1,4 +1,4 @@
-package com.pma.service;
+package com.obyleus.policymanagement.service;
 
 
 import org.springframework.boot.CommandLineRunner;
@@ -6,8 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.stereotype.Service;
-import com.pma.entity.Customer;
-import com.pma.repository.CustomerRepository;
+
+import com.obyleus.policymanagement.entity.Customer;
+import com.obyleus.policymanagement.repository.CustomerRepository;
 
 @Service
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })

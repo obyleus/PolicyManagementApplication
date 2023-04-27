@@ -1,4 +1,4 @@
-package com.pma.entity;
+package com.obyleus.policymanagement.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

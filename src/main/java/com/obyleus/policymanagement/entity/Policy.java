@@ -1,4 +1,4 @@
-package com.pma.entity;
+package com.obyleus.policymanagement.entity;
 
 import java.util.Date;
 
