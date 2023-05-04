@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.obyleus.policymanagement.entity.User;
-import com.obyleus.policymanagement.repository.UserRepository;
+import com.obyleus.policymanagement.repository.IUserRepository;
 
 @RestController
 @RequestMapping("/api/v1/policy-management")
 public class UserController {
 	
-	private UserRepository userRepository;
+	private IUserRepository userRepository;
 	
-	public UserController(UserRepository userRepository) {
+	public UserController(IUserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 	

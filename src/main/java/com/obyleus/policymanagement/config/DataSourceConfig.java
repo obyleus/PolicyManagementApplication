@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class DataSourceConfig {
 
 	@Bean
-	public DataSource getDataSource() {
+	DataSource getDataSource() {
 		return DataSourceBuilder.create()
 				.driverClassName("com.mysql.cj.jdbc.Driver")
 				.url("jdbc:mysql://127.0.0.1:3306/policy_management_application")

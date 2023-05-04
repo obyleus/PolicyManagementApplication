@@ -1,29 +1,57 @@
 package com.obyleus.policymanagement.service;
 
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.obyleus.policymanagement.entity.Customer;
 import com.obyleus.policymanagement.repository.CustomerRepository;
 
 @Service
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
-public class CustomerService {
+public abstract class CustomerService implements ICustomerService {
 	
-	public static void main(String[] args) {
-		SpringApplication.run(CustomerService.class, args);
+    private CustomerRepository customerRepository;
+ 
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+ 
+    @Transactional
+    public List<Customer> getAllCustomer() {
+        return customerRepository.findAll();
+    }
+ 
+    @Transactional
+    public Customer getCustomerById(int id) {
+        return customerRepository.findById(id).orElse(null);
+    }
+ 
+    @Transactional
+    public Customer updateCustomerById(int id, Customer newCustomer) {
+    	Optional<Customer> customer = customerRepository.findById(id);
+		if(customer.isPresent()) {
+			Customer foundCustomer = customer.get();
+			foundCustomer.setCustomerNumber(newCustomer.getCustomerNumber());
+			foundCustomer.setCustomerFirstName(newCustomer.getCustomerFirstName());
+			foundCustomer.setCustomerLastName(newCustomer.getCustomerLastName());
+			customerRepository.save(foundCustomer);
+			return foundCustomer;
+		}else
+			return null;
+    }
+ 
+    @Transactional
+    public void deleteCustomerById(int id) {
+        customerRepository.deleteById(id);
+		
+    }
+    
+    @Transactional
+	public Customer addNewCustomer(Customer newCustomer) {
+		return customerRepository.save(newCustomer);
 	}
-	
-	
-	public CommandLineRunner databasePopulator(CustomerRepository customerRepository) {
-		return args -> {
-			customerRepository.save(new Customer(1020, "haha", "hehe"));
-		};
-	}
-	
 
 }
