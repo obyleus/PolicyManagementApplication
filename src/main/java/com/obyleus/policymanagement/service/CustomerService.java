@@ -11,7 +11,7 @@ import com.obyleus.policymanagement.entity.Customer;
 import com.obyleus.policymanagement.repository.CustomerRepository;
 
 @Service
-public abstract class CustomerService implements ICustomerService {
+public class CustomerService  {
 	
     private CustomerRepository customerRepository;
  
