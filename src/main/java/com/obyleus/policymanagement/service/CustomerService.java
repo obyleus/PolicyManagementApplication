@@ -2,7 +2,6 @@ package com.obyleus.policymanagement.service;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +12,7 @@ import com.obyleus.policymanagement.repository.CustomerRepository;
 @Service
 public class CustomerService  {
 	
-    private CustomerRepository customerRepository;
+	private CustomerRepository customerRepository;
  
     public CustomerService(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
@@ -21,23 +20,22 @@ public class CustomerService  {
  
     @Transactional
     public List<Customer> getAllCustomer() {
-        return customerRepository.findAll();
+        return customerRepository.getAllCustomer();
     }
  
     @Transactional
     public Customer getCustomerById(int id) {
-        return customerRepository.findById(id).orElse(null);
+        return customerRepository.getCustomerById(id);
     }
  
     @Transactional
     public Customer updateCustomerById(int id, Customer newCustomer) {
-    	Optional<Customer> customer = customerRepository.findById(id);
-		if(customer.isPresent()) {
-			Customer foundCustomer = customer.get();
+    	Customer foundCustomer = customerRepository.getCustomerById(id);
+		if(null != foundCustomer) {
 			foundCustomer.setCustomerNumber(newCustomer.getCustomerNumber());
 			foundCustomer.setCustomerFirstName(newCustomer.getCustomerFirstName());
 			foundCustomer.setCustomerLastName(newCustomer.getCustomerLastName());
-			customerRepository.save(foundCustomer);
+			customerRepository.updateCustomerById(foundCustomer);
 			return foundCustomer;
 		}else
 			return null;
@@ -45,13 +43,16 @@ public class CustomerService  {
  
     @Transactional
     public void deleteCustomerById(int id) {
-        customerRepository.deleteById(id);
+    	Customer foundCustomer = customerRepository.getCustomerById(id);
+		if(null != foundCustomer) {
+        customerRepository.deleteCustomer(foundCustomer);
+		}
 		
     }
     
     @Transactional
 	public Customer addNewCustomer(Customer newCustomer) {
-		return customerRepository.save(newCustomer);
+		customerRepository.addNewCustomer(newCustomer);
+		return newCustomer;
 	}
-
 }

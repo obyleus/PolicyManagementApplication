@@ -18,7 +18,6 @@ import com.obyleus.policymanagement.service.CustomerService;
 @RequestMapping("/api/v1/policy-management")
 public class CustomerController {
 	
-	
 	private CustomerService customerService;
 	
 	public CustomerController(CustomerService customerService) {

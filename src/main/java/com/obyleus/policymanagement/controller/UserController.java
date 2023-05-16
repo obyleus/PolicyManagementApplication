@@ -1,7 +1,6 @@
 package com.obyleus.policymanagement.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,51 +12,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.obyleus.policymanagement.entity.User;
-import com.obyleus.policymanagement.repository.IUserRepository;
+import com.obyleus.policymanagement.service.UserService;
 
 @RestController
 @RequestMapping("/api/v1/policy-management")
 public class UserController {
 	
-	private IUserRepository userRepository;
+	private UserService userService;
 	
-	public UserController(IUserRepository userRepository) {
-		this.userRepository = userRepository;
+	public UserController(UserService userService) {
+		this.userService = userService;
 	}
 	
 	@PostMapping("/users")
 	public User addNewUser(@RequestBody User newUser) {
-		return userRepository.save(newUser);
-		
+		return userService.addNewUser(newUser);
 	}
-		
+	
 	@GetMapping("/users")
 	public List<User> getAllUser() {
-		return userRepository.findAll();
+		return userService.getAllUser();
 	}
 	
 	@GetMapping("/users/{id}")
 	public User getUserById(@PathVariable int id) {
-		return userRepository.findById(id).orElse(null);
+		return userService.getUserById(id);
 	}
 	
 	@PutMapping("/users/{id}")	
 	public User updateUserById(@PathVariable int id, @RequestBody User newUser) {
-		Optional<User> user = userRepository.findById(id);
-		if(user.isPresent()) {
-			User foundUser = user.get();
-			foundUser.setUserName(newUser.getUserName());
-			foundUser.setUserPass(newUser.getUserPass());
-			foundUser.setUserFirstName(newUser.getUserFirstName());
-			foundUser.setUserLastName(newUser.getUserLastName());
-			userRepository.save(foundUser);
-			return foundUser;
-		}else
-			return null;
+		return userService.updateUserById(id, newUser);
 	}
 	
 	@DeleteMapping("/users/{id}")
 	public void deleteUserById(@PathVariable int id) {
-		userRepository.deleteById(id);
-}
+		userService.deleteUserById(id);
+	}
 }
