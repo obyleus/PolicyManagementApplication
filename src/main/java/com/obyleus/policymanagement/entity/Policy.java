@@ -32,6 +32,11 @@ public class Policy {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date policyCreateDate;
 	
+	@PrePersist
+	private void currentDateTime() {
+		policyCreateDate = new Date();
+	}
+	
 	@Column(name = "policy_update_user")
 	private String policyUpdateUser;
 	

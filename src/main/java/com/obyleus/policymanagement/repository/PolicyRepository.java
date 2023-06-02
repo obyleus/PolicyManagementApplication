@@ -27,27 +27,21 @@ public class PolicyRepository {
 	}
 	
 	@Transactional
-	public Policy getPolicyById(int id) {
+	public Policy findById(int id) {
 		Session session = entityManager.unwrap(Session.class);
 		Policy policy = session.get(Policy.class, id);
 		return policy;
 	}
 	
 	@Transactional
-	public void addNewPolicy(Policy policy) {
+	public void addNewPolicy(Policy newPolicy) {
 		Session session = entityManager.unwrap(Session.class);
-		session.persist(policy);
+		session.persist(newPolicy);
 	}
-	
+
 	@Transactional
-	public void updatePolicy(Policy newPolicy) {
+	public void update(Policy foundPolicy) {
 		Session session = entityManager.unwrap(Session.class);
-		session.merge(newPolicy);
-	}
-	
-	@Transactional
-	public void updatePolicyStatus(Policy newPolicy) {
-		Session session = entityManager.unwrap(Session.class);
-		session.merge(newPolicy);
+		session.merge(foundPolicy);
 	}
 }

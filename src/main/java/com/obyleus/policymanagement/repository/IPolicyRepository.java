@@ -9,4 +9,5 @@ import com.obyleus.policymanagement.entity.Policy;
 public interface IPolicyRepository extends JpaRepository<Policy, Integer> {
 	
 	List<Policy> findById(int id);
+	List<Policy> findByPolicyNumber(String policy_number);
 }

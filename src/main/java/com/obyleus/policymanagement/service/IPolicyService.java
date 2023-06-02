@@ -8,7 +8,9 @@ public interface IPolicyService {
 	
 	List<Policy> getAll();
 	Policy getPolicyById(int id);
-	void add(Policy policy);
-	void update(Policy policy);
-
+	//void add(Policy newPolicy);
+	//void update(Policy policy);
+	
+	Policy add(Policy policy);
+	Policy update(int id, Policy policy);
 }

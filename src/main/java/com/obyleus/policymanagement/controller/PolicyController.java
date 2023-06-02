@@ -2,6 +2,7 @@ package com.obyleus.policymanagement.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import com.obyleus.policymanagement.service.PolicyService;
 @RequestMapping("/api/v1/policy-management")
 public class PolicyController {
 	
+	@Autowired
 	private PolicyService policyService;
 	
 	public PolicyController(PolicyService policyService) {
@@ -36,15 +38,10 @@ public class PolicyController {
 	@GetMapping("/policies/{id}")
 	public Policy getPolicyById(@PathVariable int id) {
 		return policyService.getPolicyById(id);
-	}
+	}	
 	
-	@PutMapping("/policies/id/{id}")
-	public Policy updatePolicy(@PathVariable int id, @RequestBody Policy newPolicy) {
-		return policyService.updatePolicy(id, newPolicy);		
-	}
-	
-	@PutMapping("policies/status/id/{id}")
-	public Policy updatePolicyStatus(@PathVariable int id, @RequestBody Policy newPolicy) {
-		return policyService.updatePolicyStatus(id, newPolicy);
+	@PutMapping("/policies/{id}")
+	public Policy update(@PathVariable int id, @RequestBody Policy policy) {
+		return policyService.update(id, policy);
 	}
 }
